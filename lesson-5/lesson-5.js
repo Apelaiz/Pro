@@ -1,54 +1,86 @@
-// let titleProject = 'Калькулятор по разработке сайта'
-// let screensValue = 'шаблонные, с уникальным дизайном, с анимациями'
-// let screenPrice = '10000'
-// let percentage = '10'
-// let responsive = 'true'
+// let screenPrice = 10000
+// let percentage = 10 
+// let allServicePrices;
+// let newTitle = '';
+// let titleProject;
+// let screensValue;
+// let responsive;
 
-let screenPrice = 10000
-let percentage = 10 
 
-let titleProject = prompt ('Название проекта')
-console.log(titleProject);
+const asking = function() {
+  titleProject = prompt ('Название проекта')
+  screensValue = prompt ('шаблонные, с уникальным дизайном, с анимациями')
+  responsive = prompt ('Нужен респонсив?')
+}
 
-let screensValue = prompt ('шаблонные, с уникальным дизайном, с анимациями')
-console.log(screensValue);
 
-let responsive = prompt ('Нужен респонсив?')
-console.log(responsive);
 
 let service = prompt ('Какой дополнительный вид услуги нужен?')
-console.log(service);
-
 let servicePrice = +prompt ('Сколько это будет стоить?')
-console.log(servicePrice);
-
 let serviceSecond = prompt ('Какой дополнительный вид услуги нужен?')
-console.log(serviceSecond);
-
 let servicePriceSecond = +prompt ('Сколько это будет стоить?')
-console.log(servicePriceSecond);
 
-let fullPrice = screenPrice + servicePrice + servicePriceSecond
-console.log(fullPrice);
 
-let percentageResult = +(fullPrice * (percentage / 100))
-console.log(percentageResult, 'Процент подрядчику: ')
+const getAllServicePrices = function() {
+    return servicePrice + serviceSecond
+}
 
-// new variables
 
-let servicePercentPrice = fullPrice - percentageResult
-console.log(Math.ceil(servicePercentPrice), 'Итоговая сумма проекта с учётом % подрядчику');
+function getFullPrice() {
+    return screenPrice + allServicePrices
+}
+
+
+const getServicePercentPices = function () {
+    return fullPrice - (fullPrice * (percentage / 100))
+}
+
+
+const getTitle = function() {
+    return titleProject[0].toUpperCase() + titleProject.slice(1).toLocaleLowerCase()
+}
+
+
 
 //Предоставление скидки
-
-if(fullPrice > 50000) {
-    console.log ('Делаем скидку 10%');
-} else if (fullPrice > 20000 && fullPrice < 40000) {
-    console.log ("Делаем скидку 5%");
-} else if (fullPrice < 20000 && fullPrice > 0) {
-    console.log('Скидка не предусмотрена');
-} else if (fullPrice < 0) {
-    console.log ('Что-то пошло не так')
-} else if (fullPrice === 0 || fullPrice === 20000 || fullPrice === 50000) {
-    console.log('Проверка на строгое равенство')
+function getRollbackMessage(fullPrice) {
+    if (fullPrice > 50000) {
+        let percentage = 10;
+        console.log('Ваша скидка', percentage.toString(), 'процентов');
+    } else if (fullPrice > 20000 && fullPrice < 50000) {
+        let percentage = 5;
+        console.log('Ваша скидка', percentage.toString(), 'процентов');
+    } else if (fullPrice < 20000 && fullPrice > 0) {
+        console.log('Скидка не предусмотрена');
+    } else if (fullPrice < 0) {
+        console.log('Что то пошло не так');
+    } else if (fullPrice === 0) {
+        console.log('Значение стоимости: 0');
+    } else if (fullPrice === 20000) {
+        console.log('Скидка не применяется к данной сумме');
+    } else if (fullPrice === 50000) {
+        console.log('Скидка не применяется к данной сумме');
+    } else {
+        console.log('Что то пошло не так');
+    }
 }
+
+
+asking();
+allServicePrices = getAllServicePrices();
+fullPrice = getFullPrice();
+servicePercentPrice = getAllServicePrices();
+getRollbackMessage(fullPrice);
+
+newTitle = getTitle();
+
+
+console.log(service);
+console.log(titleProject);
+console.log(screensValue);
+console.log(responsive);
+console.log(servicePrice);
+console.log(serviceSecond);
+console.log(servicePriceSecond);
+console.log(Math.ceil(servicePercentPrice));
+console.log(getRollbackMessag);
